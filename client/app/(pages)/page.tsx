@@ -216,7 +216,7 @@ const Home = () => {
 
           {/* Right Image Container */}
           <div className="flex justify-center md:justify-end opacity-0 animate-reveal-scale delay-200">
-            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full border-[8px] border-zinc-100 dark:border-zinc-900 overflow-hidden shadow-2xl">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full border-[3px] border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-2xl">
               <Image
                 src={about?.profileImage || "/your-image-path.jpg"}
                 alt={about?.name || "Profile"}
