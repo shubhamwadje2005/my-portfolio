@@ -26,3 +26,23 @@ mongoose.connection.once("open", () => {
         console.log(`node env ${process.env.NODE_ENV}`)
     })
 })
+
+// const cors = require("cors");
+
+// const allowedOrigins = [
+//   "http://localhost:3000",
+//   "https://my-portfolio-one-peach-72.vercel.app",
+// ];
+
+// app.use(
+//   cors({
+//     origin(origin, callback) {
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     credentials: true,
+//   })
+// );
