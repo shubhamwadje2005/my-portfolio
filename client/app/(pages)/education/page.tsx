@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { useGetEducationQuery } from "@/redux/api/education.api";
 import { GraduationCap, Calendar, Loader2 } from "lucide-react";
+import PageLoader from "@/app/_components/PageLoader";
 
 const EducationPage = () => {
     const { data: educationData, isLoading } = useGetEducationQuery();
@@ -39,14 +40,7 @@ const EducationPage = () => {
     }, [education, isLoading]);
 
     if (isLoading) {
-        return (
-            <div className="bg-white dark:bg-black min-h-screen flex flex-col items-center justify-center text-black dark:text-white">
-                <div className="relative w-16 h-16 mb-4">
-                    <Loader2 className="w-full h-full text-zinc-400 dark:text-zinc-500 animate-spin" strokeWidth={1} />
-                </div>
-                <p className="text-zinc-500 dark:text-zinc-400 text-lg font-medium tracking-wide">Loading education...</p>
-            </div>
-        );
+        return <PageLoader message="Loading education" />;
     }
 
     return (

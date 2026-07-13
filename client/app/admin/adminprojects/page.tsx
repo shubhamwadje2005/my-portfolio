@@ -141,6 +141,7 @@ const AdminProject = () => {
         register,
         handleSubmit,
         setValue,
+        reset,
         formState: { errors }
     } = useForm<FormType>({
         resolver: zodResolver(schema)
@@ -163,6 +164,14 @@ const AdminProject = () => {
         setPreview(null)
         setImage(undefined)
         setEditId(null)
+        reset({
+            title: "",
+            description: "",
+            category: "",
+            technologies: "",
+            liveUrl: "",
+            githubUrl: ""
+        })
     }
     const handleSave = handleSubmit(async () => {
 
@@ -213,7 +222,7 @@ const AdminProject = () => {
 
     return (
 
-        <div className="max-w-5xl mx-auto mt-20 border rounded-2xl">
+        <div className="w-full max-w-5xl mx-auto mt-20 border border-zinc-800/40 rounded-2xl overflow-hidden">
 
             <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
 
@@ -235,153 +244,155 @@ const AdminProject = () => {
 
                 </div>
 
-                <table className="w-full text-sm table-fixed">
+                <div className="overflow-x-auto">
+                    <table className="w-full text-sm table-fixed min-w-[700px]">
 
-                    <thead className="border-b border-zinc-700 text-gray-400">
+                        <thead className="border-b border-zinc-700 text-gray-400">
 
-                        <tr>
-                            <th className="text-left py-3">Title</th>
-                            <th className="text-left py-3">Category</th>
-                            <th className="text-left py-3">Technologies</th>
-                            <th className="text-right py-3">Actions</th>
-                        </tr>
+                            <tr>
+                                <th className="text-left py-3">Title</th>
+                                <th className="text-left py-3">Category</th>
+                                <th className="text-left py-3">Technologies</th>
+                                <th className="text-right py-3">Actions</th>
+                            </tr>
 
-                    </thead>
+                        </thead>
 
-                    <tbody>
+                        <tbody>
 
-                        {projects.map((p) => (
+                            {projects.map((p) => (
 
-                            <tr key={p._id} className="border-b border-zinc-800">
+                                <tr key={p._id} className="border-b border-zinc-800">
 
-                                <td className="py-4 text-gray-200">
-                                    {p.title}
-                                </td>
+                                    <td className="py-4 text-gray-200">
+                                        {p.title}
+                                    </td>
 
-                                <td className="py-4 text-gray-400">
-                                    {p.category}
-                                </td>
+                                    <td className="py-4 text-gray-400">
+                                        {p.category}
+                                    </td>
 
-                                <td className="py-4 max-w-[320px]">
-                                    <div className="flex flex-wrap gap-2 items-center">
-                                        {(() => {
-                                            // 1. Data kasa hi aso (string ki array), tyala ekak proper flat array madhe convert kara
-                                            const rawData = Array.isArray(p.technologies) ? p.technologies : [p.technologies];
+                                    <td className="py-4 max-w-[320px]">
+                                        <div className="flex flex-wrap gap-2 items-center">
+                                            {(() => {
+                                                // 1. Data kasa hi aso (string ki array), tyala ekak proper flat array madhe convert kara
+                                                const rawData = Array.isArray(p.technologies) ? p.technologies : [p.technologies];
 
-                                            const techList = rawData
-                                                .flatMap(item => (typeof item === 'string' ? item.split(',') : item))
-                                                .map(t => String(t).trim())
-                                                .filter(t => t !== "" && t !== "undefined");
+                                                const techList = rawData
+                                                    .flatMap(item => (typeof item === 'string' ? item.split(',') : item))
+                                                    .map(t => String(t).trim())
+                                                    .filter(t => t !== "" && t !== "undefined");
 
-                                            return (
-                                                <>
-                                                    {/* 2. Display First 2 Badges */}
-                                                    {techList.slice(0, 2).map((t, i) => (
-                                                        <span
-                                                            key={i}
-                                                            className="bg-zinc-800 text-gray-300 text-xs px-2 py-1 rounded border border-zinc-700 shadow-sm"
-                                                        >
-                                                            {t}
-                                                        </span>
-                                                    ))}
+                                                return (
+                                                    <>
+                                                        {/* 2. Display First 2 Badges */}
+                                                        {techList.slice(0, 2).map((t, i) => (
+                                                            <span
+                                                                key={i}
+                                                                className="bg-zinc-800 text-gray-300 text-xs px-2 py-1 rounded border border-zinc-700 shadow-sm"
+                                                            >
+                                                                {t}
+                                                            </span>
+                                                        ))}
 
-                                                    {/* 3. Show +Count if more than 2 */}
-                                                    {techList.length > 2 && (
-                                                        <span className="text-gray-500 text-xs font-medium ml-1">
-                                                            +{techList.length - 2}
-                                                        </span>
-                                                    )}
-                                                </>
-                                            );
-                                        })()}
-                                    </div>
-                                </td>
+                                                        {/* 3. Show +Count if more than 2 */}
+                                                        {techList.length > 2 && (
+                                                            <span className="text-gray-500 text-xs font-medium ml-1">
+                                                                +{techList.length - 2}
+                                                            </span>
+                                                        )}
+                                                    </>
+                                                );
+                                            })()}
+                                        </div>
+                                    </td>
 
-                                <td className="text-center relative">
+                                    <td className="text-center relative">
 
-                                    <div className="flex justify-end">
-                                        <button
-                                            onClick={() =>
-                                                setMenuId(menuId === p._id ? null : p._id)
-                                            }
-                                            className="text-gray-400 text-3xl   "
-                                        >
-                                            <BsThreeDots />
-                                        </button>
-                                    </div>
+                                        <div className="flex justify-end">
+                                            <button
+                                                onClick={() =>
+                                                    setMenuId(menuId === p._id ? null : p._id)
+                                                }
+                                                className="text-gray-400 text-3xl   "
+                                            >
+                                                <BsThreeDots />
+                                            </button>
+                                        </div>
 
-                                    {menuId === p._id && (
-
-                                        <div
-                                            className="fixed inset-0 flex items-center justify-center bg-black/50"
-                                            onClick={() => setMenuId(null)}
-                                        >
+                                        {menuId === p._id && (
 
                                             <div
-                                                className="bg-zinc-900 border border-zinc-700 rounded-xl p-4 w-[200px]"
-                                                onClick={(e) => e.stopPropagation()}
+                                                className="fixed inset-0 flex items-center justify-center bg-black/50"
+                                                onClick={() => setMenuId(null)}
                                             >
 
-                                                <button
-                                                    onClick={() => {
-
-                                                        setEditId(p._id)
-
-                                                        setForm({
-                                                            title: p.title,
-                                                            description: p.description,
-                                                            category: p.category,
-                                                            technologies: p.technologies,
-                                                            liveUrl: p.liveUrl,
-                                                            githubUrl: p.githubUrl
-                                                        })
-
-                                                        setValue("title", p.title)
-                                                        setValue("category", p.category)
-                                                        setValue("description", p.description)
-                                                        setValue("technologies", p.technologies.join(","))
-                                                        setValue("liveUrl", p.liveUrl)
-                                                        setValue("githubUrl", p.githubUrl)
-
-                                                        setPreview(p.imageUrl)
-                                                        setMenuId(null)
-                                                        setOpen(true)
-
-                                                    }}
-                                                    className="block w-full text-left p-2 text-white hover:bg-zinc-700 rounded"
-                                                >
-                                                    Edit
-                                                </button>
-
-                                                <button
-                                                    onClick={() => handleDelete(p._id)}
-                                                    disabled={deleteLoading}
-                                                    className="block w-full text-left p-2 text-red-400 hover:bg-zinc-700 rounded flex items-center gap-2"
+                                                <div
+                                                    className="bg-zinc-900 border border-zinc-700 rounded-xl p-4 w-[200px]"
+                                                    onClick={(e) => e.stopPropagation()}
                                                 >
 
-                                                    {deleteLoading && (
-                                                        <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin"></div>
-                                                    )}
+                                                    <button
+                                                        onClick={() => {
 
-                                                    Delete
+                                                            setEditId(p._id)
 
-                                                </button>
+                                                            setForm({
+                                                                title: p.title,
+                                                                description: p.description,
+                                                                category: p.category,
+                                                                technologies: p.technologies,
+                                                                liveUrl: p.liveUrl,
+                                                                githubUrl: p.githubUrl
+                                                            })
+
+                                                            setValue("title", p.title)
+                                                            setValue("category", p.category)
+                                                            setValue("description", p.description)
+                                                            setValue("technologies", p.technologies.join(","))
+                                                            setValue("liveUrl", p.liveUrl)
+                                                            setValue("githubUrl", p.githubUrl)
+
+                                                            setPreview(p.imageUrl)
+                                                            setMenuId(null)
+                                                            setOpen(true)
+
+                                                        }}
+                                                        className="block w-full text-left p-2 text-white hover:bg-zinc-700 rounded"
+                                                    >
+                                                        Edit
+                                                    </button>
+
+                                                    <button
+                                                        onClick={() => handleDelete(p._id)}
+                                                        disabled={deleteLoading}
+                                                        className="block w-full text-left p-2 text-red-400 hover:bg-zinc-700 rounded flex items-center gap-2"
+                                                    >
+
+                                                        {deleteLoading && (
+                                                            <div className="w-4 h-4 border-2 border-red-400 border-t-transparent rounded-full animate-spin"></div>
+                                                        )}
+
+                                                        Delete
+
+                                                    </button>
+
+                                                </div>
 
                                             </div>
 
-                                        </div>
+                                        )}
 
-                                    )}
+                                    </td>
 
-                                </td>
+                                </tr>
 
-                            </tr>
+                            ))}
 
-                        ))}
+                        </tbody>
 
-                    </tbody>
-
-                </table>
+                    </table>
+                </div>
 
             </div>
 
@@ -515,7 +526,7 @@ const AdminProject = () => {
             {/* Modal */}
             {open && (
                 <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
-                    <div className="bg-[#1c1c1e] p-7 rounded-2xl w-[420px] border border-zinc-700 max-h-[90vh] overflow-y-auto">
+                    <div className="bg-[#1c1c1e] p-7 rounded-2xl w-full max-w-[420px] mx-4 border border-zinc-700 max-h-[90vh] overflow-y-auto">
 
 
                         <div className="mb-6">
@@ -619,7 +630,7 @@ const AdminProject = () => {
                         />
 
                         {/* Live URL + Github URL side by side */}
-                        <div className="grid grid-cols-2 gap-3 mb-7">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-7">
                             <div>
                                 <label className="text-[11px] font-semibold tracking-widest uppercase text-gray-500 block mb-1.5">
                                     Live URL

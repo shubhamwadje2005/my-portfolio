@@ -56,7 +56,8 @@ const AdminEducation = () => {
     const {
         register,
         handleSubmit,
-        setValue
+        setValue,
+        reset
     } = useForm<FormType>({
         resolver: zodResolver(schema)
     })
@@ -76,6 +77,13 @@ const AdminEducation = () => {
             endYear: 0
         })
         setEditId(null)
+        reset({
+            degree: "",
+            university: "",
+            location: "",
+            startYear: "",
+            endYear: ""
+        })
     }
 
     const handleSave = handleSubmit(async () => {
@@ -119,7 +127,7 @@ const AdminEducation = () => {
 
     return (
 
-        <div className="max-w-5xl mx-auto mt-20 border rounded-2xl ">
+        <div className="w-full max-w-5xl mx-auto mt-20 border border-zinc-800/40 rounded-2xl overflow-hidden">
 
             <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 ">
 
@@ -139,100 +147,102 @@ const AdminEducation = () => {
                     </button>
                 </div>
 
-                <table className="w-full text-sm table-fixed">
-                    <thead className="border-b border-zinc-700 text-gray-400">
-                        <tr>
-                            <th className="text-left py-3">Degree</th>
-                            <th className="text-left py-3">University</th>
-                            <th className="text-left py-3">Years</th>
-                            <th className="text-right py-3">Actions</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {educations.map((e) => (
-                            <tr key={e._id} className="border-b border-zinc-800">
-
-                                <td className="py-4 text-gray-200">{e.degree}</td>
-
-                                <td className="py-4 text-gray-400">
-                                    {e.university} <br />
-                                    <span className="text-xs text-gray-500">{e.location}</span>
-                                </td>
-
-                                <td className="py-4 text-gray-400">
-                                    {e.startYear} - {e.endYear}
-                                </td>
-
-                                <td className="text-right relative">
-
-                                    <button
-                                        onClick={() =>
-                                            setMenuId(menuId === e._id ? null : e._id)
-                                        }
-                                        className="text-gray-400 text-2xl"
-                                    >
-                                        <BsThreeDots />
-                                    </button>
-
-                                    {menuId === e._id && (
-                                        <div
-                                            className="fixed inset-0 flex items-center justify-center bg-black/50"
-                                            onClick={() => setMenuId(null)}
-                                        >
-                                            <div
-                                                className="bg-zinc-900 border border-zinc-700 rounded-xl p-4 w-[200px]"
-                                                onClick={(ev) => ev.stopPropagation()}
-                                            >
-                                                <button
-                                                    onClick={() => {
-                                                        setEditId(e._id)
-
-                                                        setForm({
-                                                            degree: e.degree,
-                                                            university: e.university,
-                                                            location: e.location,
-                                                            startYear: e.startYear,
-                                                            endYear: e.endYear
-                                                        })
-
-                                                        setValue("degree", e.degree)
-                                                        setValue("university", e.university)
-                                                        setValue("location", e.location)
-                                                        setValue("startYear", String(e.startYear))
-                                                        setValue("endYear", String(e.endYear))
-
-                                                        setMenuId(null)
-                                                        setOpen(true)
-                                                    }}
-                                                    className="block w-full text-left p-2 text-white hover:bg-zinc-700 rounded"
-                                                >
-                                                    Edit
-                                                </button>
-
-                                                <button
-                                                    onClick={() => handleDelete(e._id)}
-                                                    className="block w-full text-left p-2 text-red-400 hover:bg-zinc-700 rounded"
-                                                >
-                                                    Delete
-                                                </button>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                </td>
-
+                <div className="overflow-x-auto">
+                    <table className="w-full text-sm table-fixed min-w-[650px]">
+                        <thead className="border-b border-zinc-700 text-gray-400">
+                            <tr>
+                                <th className="text-left py-3">Degree</th>
+                                <th className="text-left py-3">University</th>
+                                <th className="text-left py-3">Years</th>
+                                <th className="text-right py-3">Actions</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+
+                        <tbody>
+                            {educations.map((e) => (
+                                <tr key={e._id} className="border-b border-zinc-800">
+
+                                    <td className="py-4 text-gray-200">{e.degree}</td>
+
+                                    <td className="py-4 text-gray-400">
+                                        {e.university} <br />
+                                        <span className="text-xs text-gray-500">{e.location}</span>
+                                    </td>
+
+                                    <td className="py-4 text-gray-400">
+                                        {e.startYear} - {e.endYear}
+                                    </td>
+
+                                    <td className="text-right relative">
+
+                                        <button
+                                            onClick={() =>
+                                                setMenuId(menuId === e._id ? null : e._id)
+                                            }
+                                            className="text-gray-400 text-2xl"
+                                        >
+                                            <BsThreeDots />
+                                        </button>
+
+                                        {menuId === e._id && (
+                                            <div
+                                                className="fixed inset-0 flex items-center justify-center bg-black/50"
+                                                onClick={() => setMenuId(null)}
+                                            >
+                                                <div
+                                                    className="bg-zinc-900 border border-zinc-700 rounded-xl p-4 w-[200px]"
+                                                    onClick={(ev) => ev.stopPropagation()}
+                                                >
+                                                    <button
+                                                        onClick={() => {
+                                                            setEditId(e._id)
+
+                                                            setForm({
+                                                                degree: e.degree,
+                                                                university: e.university,
+                                                                location: e.location,
+                                                                startYear: e.startYear,
+                                                                endYear: e.endYear
+                                                            })
+
+                                                            setValue("degree", e.degree)
+                                                            setValue("university", e.university)
+                                                            setValue("location", e.location)
+                                                            setValue("startYear", String(e.startYear))
+                                                            setValue("endYear", String(e.endYear))
+
+                                                            setMenuId(null)
+                                                            setOpen(true)
+                                                        }}
+                                                        className="block w-full text-left p-2 text-white hover:bg-zinc-700 rounded"
+                                                    >
+                                                        Edit
+                                                    </button>
+
+                                                    <button
+                                                        onClick={() => handleDelete(e._id)}
+                                                        className="block w-full text-left p-2 text-red-400 hover:bg-zinc-700 rounded"
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                    </td>
+
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
             {/* MODAL */}
             {open && (
                 <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
-                    <div className="bg-[#1c1c1e] p-7 rounded-2xl w-[420px] border border-zinc-700 max-h-[90vh] overflow-y-auto">
+                    <div className="bg-[#1c1c1e] p-7 rounded-2xl w-full max-w-[420px] mx-4 border border-zinc-700 max-h-[90vh] overflow-y-auto">
 
                         {/* Header */}
                         <div className="mb-6">
@@ -287,7 +297,7 @@ const AdminEducation = () => {
                         />
 
                         {/* Years */}
-                        <div className="grid grid-cols-2 gap-3 mb-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
                             <div>
                                 <label className="text-[11px] font-semibold tracking-widest uppercase text-gray-500 block mb-1.5">
                                     Start Year

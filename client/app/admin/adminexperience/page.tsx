@@ -645,7 +645,7 @@ const ExperienceAdmin = () => {
 
     return (
 
-        <div className="max-w-5xl mx-auto mt-10 px-4 sm:px-6 lg:px-0 border rounded-2xl">
+        <div className="w-full max-w-5xl mx-auto mt-10 px-4 sm:px-6 lg:px-0 border border-zinc-800/40 rounded-2xl overflow-hidden">
 
             <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 sm:p-6 lg:p-8">
 

@@ -125,7 +125,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     ]
 
     return <>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
@@ -150,7 +150,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             </div>
 
             {/* Tabs */}
-            <div className="mt-6 overflow-x-auto">
+            <div className="mt-6 overflow-x-auto w-full">
                 <div className="flex gap-2 bg-gray-900 p-1 rounded-xl w-max">
 
                     {tabs.map((tab) => (
@@ -171,7 +171,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
             </div>
 
             {/* Content */}
-            <div className="mt-6 sm:mt-8">
+            <div className="mt-6 sm:mt-8 w-full">
                 {children}
             </div>
 

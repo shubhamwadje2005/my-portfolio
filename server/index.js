@@ -2,12 +2,27 @@ require("dotenv").config()
 const express = require("express")
 const mongoose = require("mongoose")
 const cors = require("cors")
-const { FRONTEND_URL } = require("./utils/config")
+const cookieParser = require("cookie-parser")
+const { FRONTEND_URL, ALLOWED_ORIGINS } = require("./utils/config")
 
 const app = express()
 mongoose.connect(process.env.MONGO_URL)
 app.use(express.json())
-app.use(cors({ origin: FRONTEND_URL, credentials: true }))
+app.use(cookieParser())
+
+app.use(cors({
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+        if (ALLOWED_ORIGINS.indexOf(origin) !== -1 || origin.startsWith("http://localhost:")) {
+            return callback(null, true);
+        }
+        if (process.env.NODE_ENV !== "production") {
+            return callback(null, true);
+        }
+        return callback(new Error('CORS policy check failed'), false);
+    },
+    credentials: true
+}))
 
 app.use("/api/user", require("./routes/contact.routes.js"))
 app.use("/api/admin", require("./routes/adminroutes.js"))

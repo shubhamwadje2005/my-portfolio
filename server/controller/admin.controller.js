@@ -37,7 +37,7 @@ exports.singin = asyncHandler(async (req, res) => {
     }
 
     const token = jwt.sign({ _id: result._id }, process.env.JWT_KEY, { expiresIn: "1d" })
-    res.cookie("ADMIN", token, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true, secure: process.env.NODE_ENV === PRODUCTION })
+    res.cookie("ADMIN", token, { maxAge: 1000 * 60 * 60 * 24, httpOnly: true, secure: process.env.NODE_ENV === PRODUCTION, sameSite: process.env.NODE_ENV === PRODUCTION ? "none" : "lax" })
 
     res.status(200).json({
         message: "admin login success", result: {

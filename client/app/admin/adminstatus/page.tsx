@@ -115,7 +115,7 @@ const StatusAdmin = () => {
     ]
 
     return (
-        <div className="max-w-5xl mx-auto mt-10 border rounded-[2.5rem]">
+        <div className="w-full max-w-5xl mx-auto mt-10 border border-zinc-900 rounded-[2.5rem] overflow-hidden">
             <div className="bg-zinc-950 border border-zinc-900 rounded-[2.5rem] p-8 md:p-12">
 
                 {/* Header */}

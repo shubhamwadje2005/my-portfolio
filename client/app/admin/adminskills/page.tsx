@@ -114,6 +114,14 @@ const SkillsAdminPage = () => {
                 }
                 await addSkill(addPayload).unwrap()
             }
+            reset({
+                skillName: "",
+                category: "",
+                icon: "",
+                level: 0,
+                order: 0
+            })
+            setIconPreview(null)
             setIsModalOpen(false)
             refetch()
         } catch (error) {
@@ -134,7 +142,7 @@ const SkillsAdminPage = () => {
     }
 
     return (
-        <div className="max-w-5xl mx-auto mt-10 border rounded-2xl">
+        <div className="w-full max-w-5xl mx-auto mt-10 border border-zinc-800/40 rounded-2xl overflow-hidden">
             <div className="bg-zinc-900 border  border-zinc-800 rounded-2xl p-6">
 
                 {/* Header */}
@@ -150,7 +158,7 @@ const SkillsAdminPage = () => {
 
                 {/* Table */}
                 <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
+                    <table className="w-full text-sm min-w-[600px]">
                         <thead className="border-b border-zinc-800 text-gray-500 uppercase text-xs tracking-wider">
                             <tr>
                                 <th className="text-left py-4 px-6">Name</th>
@@ -297,7 +305,7 @@ const SkillsAdminPage = () => {
                                 />
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">
                                         Level (0-100)

@@ -9,6 +9,7 @@ import { useGetStatusQuery } from "@/redux/api/status.api";
 import { useGetProjectQuery } from "@/redux/api/project.api";
 import { useGetSkillQuery } from "@/redux/api/skill.api";
 import DynamicIcon from "@/components/DynamicIcon";
+import PageLoader from "@/app/_components/PageLoader";
 
 const Home = () => {
   const [clickedSkillId, setClickedSkillId] = useState<string | null>(null);
@@ -68,14 +69,7 @@ const Home = () => {
   ];
 
   if (isLoading) {
-    return (
-      <div className="bg-white dark:bg-black min-h-screen flex flex-col items-center justify-center text-black dark:text-white">
-        <div className="relative w-16 h-16 mb-4">
-          <Loader2 className="w-full h-full text-zinc-400 dark:text-zinc-500 animate-spin" strokeWidth={1} />
-        </div>
-        <p className="text-zinc-500 dark:text-zinc-400 text-lg font-medium tracking-wide">Loading...</p>
-      </div>
-    );
+    return <PageLoader message="Loading portfolio" />;
   }
 
   return (
@@ -215,16 +209,18 @@ const Home = () => {
           </div>
 
           {/* Right Image Container */}
-          <div className="flex justify-center md:justify-end opacity-0 animate-reveal-scale delay-200">
-            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full border-[3px] border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-2xl">
+          <div className="flex justify-center md:justify-end items-center opacity-0 animate-reveal-scale delay-200">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 flex-shrink-0 aspect-square rounded-full overflow-hidden shadow-2xl">
               <Image
                 src={about?.profileImage || "/your-image-path.jpg"}
                 alt={about?.name || "Profile"}
                 fill
                 sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
-                className="object-cover"
+                className="object-cover object-[center_25%]"
                 priority
               />
+              {/* Border Overlay */}
+              <div className="absolute inset-0 rounded-full border-[8px] border-zinc-100 dark:border-zinc-900 pointer-events-none" />
             </div>
           </div>
         </div>

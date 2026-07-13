@@ -511,7 +511,7 @@ const AboutAdmin = () => {
 
     // ------------------ UI ------------------
     return (
-        <div className="max-w-5xl mx-auto mt-6 sm:mt-10 sm:px- border rounded-2xl">
+        <div className="w-full max-w-5xl mx-auto mt-6 sm:mt-10 border border-zinc-800/40 rounded-2xl overflow-hidden">
 
             <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 sm:p-6">
 
@@ -676,13 +676,14 @@ const AboutAdmin = () => {
                             <input
                                 type="file"
                                 accept="image/*"
-                                {...register("profileImage")}
-                                onChange={(e) => {
-                                    const file = e.target.files?.[0]
-                                    if (file) {
-                                        setPreview(URL.createObjectURL(file))
+                                {...register("profileImage", {
+                                    onChange: (e) => {
+                                        const file = e.target.files?.[0]
+                                        if (file) {
+                                            setPreview(URL.createObjectURL(file))
+                                        }
                                     }
-                                }}
+                                })}
                                 className="w-full p-2 bg-zinc-800 rounded text-white border border-zinc-700"
                             />
 

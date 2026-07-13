@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useGetProjectQuery } from "@/redux/api/project.api";
 import { ExternalLink, Github, Loader2 } from "lucide-react";
+import PageLoader from "@/app/_components/PageLoader";
 
 const ProjectsPage = () => {
     const { data: projectData, isLoading } = useGetProjectQuery();
@@ -49,14 +50,7 @@ const ProjectsPage = () => {
     }, [isLoading, activeCategory]);
 
     if (isLoading) {
-        return (
-            <div className="bg-white dark:bg-black min-h-screen flex flex-col items-center justify-center text-black dark:text-white">
-                <div className="relative w-16 h-16 mb-4">
-                    <Loader2 className="w-full h-full text-zinc-400 dark:text-zinc-500 animate-spin" strokeWidth={1} />
-                </div>
-                <p className="text-zinc-500 dark:text-zinc-400 text-lg font-medium tracking-wide">Loading projects...</p>
-            </div>
-        );
+        return <PageLoader message="Loading projects" />;
     }
 
     return (
@@ -106,8 +100,8 @@ const ProjectsPage = () => {
                 </div>
 
                 {/* Categories Tabs */}
-                <div className="flex justify-center gap-2 mb-16 animate-reveal-down" style={{ animationDelay: '0.2s', transitionDelay: '0.2s' }}>
-                    <div className="flex bg-zinc-100 dark:bg-[#111] p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800/50 shadow-sm">
+                <div className="flex flex-wrap justify-center gap-2 mb-16 animate-reveal-down" style={{ animationDelay: '0.2s', transitionDelay: '0.2s' }}>
+                    <div className="flex flex-wrap justify-center bg-zinc-100 dark:bg-[#111] p-1.5 rounded-xl border border-zinc-200 dark:border-zinc-800/50 shadow-sm">
                         {categories.map((cat) => (
                             <button
                                 key={cat}
@@ -139,7 +133,7 @@ const ProjectsPage = () => {
                             </div>
 
                             {/* Content */}
-                            <div className="p-8 space-y-5">
+                            <div className="p-5 sm:p-6 md:p-8 space-y-5">
                                 <div className="space-y-2">
                                     <h3 className="text-2xl font-black text-black dark:text-white group-hover:text-orange-500 transition-colors tracking-tight flex items-center gap-2">
                                         <span>{project.title}</span>
@@ -173,11 +167,11 @@ const ProjectsPage = () => {
                                 </div>
 
                                 {/* Actions */}
-                                <div className="flex gap-3 pt-2">
+                                <div className="flex flex-col sm:flex-row gap-3 pt-2">
                                     <a
                                         href={project.liveUrl}
                                         target="_blank"
-                                        className="flex-1 bg-black dark:bg-white text-white dark:text-black text-xs font-black py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all active:scale-95 shadow-md"
+                                        className="flex-1 bg-black dark:bg-white text-white dark:text-black text-xs whitespace-nowrap font-black py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all active:scale-95 shadow-md"
                                     >
                                         <ExternalLink size={14} />
                                         Live Demo
@@ -185,7 +179,7 @@ const ProjectsPage = () => {
                                     <a
                                         href={project.githubUrl}
                                         target="_blank"
-                                        className="flex-1 bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white text-xs font-black py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 flex items-center justify-center gap-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all active:scale-95 shadow-sm"
+                                        className="flex-1 bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white text-xs whitespace-nowrap font-black py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 flex items-center justify-center gap-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all active:scale-95 shadow-sm"
                                     >
                                         <Github size={14} />
                                         GitHub

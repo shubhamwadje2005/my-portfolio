@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useGetAboutQuery } from "@/redux/api/about.api";
 import { User, GraduationCap, Calendar, MapPin, Mail, Phone, Briefcase, Loader2 } from "lucide-react";
 import { useGetEducationQuery } from "@/redux/api/education.api";
+import PageLoader from "@/app/_components/PageLoader";
 
 const AboutPage = () => {
     const { data: aboutData, isLoading } = useGetAboutQuery();
@@ -47,14 +48,7 @@ const AboutPage = () => {
     const tabs = ["Bio", "Education", "Personal"] as const;
 
     if (isLoading || !about) {
-        return (
-            <div className="bg-white dark:bg-black min-h-screen flex flex-col items-center justify-center text-black dark:text-white">
-                <div className="relative w-16 h-16 mb-4">
-                    <Loader2 className="w-full h-full text-zinc-400 dark:text-zinc-500 animate-spin" strokeWidth={1} />
-                </div>
-                <p className="text-zinc-500 dark:text-zinc-400 text-lg font-medium tracking-wide">Loading bio...</p>
-            </div>
-        );
+        return <PageLoader message="Loading bio" />;
     }
 
     return (
@@ -167,7 +161,7 @@ const AboutPage = () => {
                         </div>
                     </div> */}
 
-                    <div className="relative w-full max-w-[800px] md:max-w-[900px] lg:max-w-[1000px] rounded-2xl border border-zinc-200 dark:border-zinc-800 animate-reveal-left group shadow-2xl overflow-visible h-[800px] md:h-[900px] lg:h-[1000px]">
+                    <div className="relative w-full max-w-[800px] md:max-w-[900px] lg:max-w-[1000px] rounded-2xl border border-zinc-200 dark:border-zinc-800 animate-reveal-left group shadow-2xl overflow-visible h-[350px] sm:h-[450px] md:h-[600px] lg:h-[700px] xl:h-[800px]">
 
                         {/* Main Image Container */}
                         <div className="relative w-full h-full rounded-2xl overflow-hidden">
@@ -202,7 +196,7 @@ const AboutPage = () => {
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
-                                    className={`flex-1 md:flex-initial px-10 md:px-8 lg:px-20 py-2.5 rounded-lg text-sm font-bold
+                                    className={`flex-1 md:flex-initial px-2 sm:px-4 md:px-8 lg:px-16 py-2.5 rounded-lg text-sm font-bold
                                          ${activeTab === tab
                                             ? "bg-white dark:bg-black text-black dark:text-white  border border-zinc-200 dark:border-zinc-700"
                                             : "text-zinc-500 hover:text-black dark:hover:text-zinc-300"
@@ -254,7 +248,14 @@ const AboutPage = () => {
                             {activeTab === "Education" && (
                                 <div className="space-y-5">
                                     {eduLoading ? (
-                                        <p className="text-zinc-500 dark:text-zinc-400">Loading...</p>
+                                        <p className="text-zinc-500 dark:text-zinc-400 flex items-center">
+                                            Loading
+                                            <span className="inline-flex ml-1">
+                                                <span className="animate-pulse-dot">.</span>
+                                                <span className="animate-pulse-dot delay-150">.</span>
+                                                <span className="animate-pulse-dot delay-300">.</span>
+                                            </span>
+                                        </p>
                                     ) : education.length > 0 ? (
                                         education.map((edu) => (
                                             <div

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useGetSkillQuery } from "@/redux/api/skill.api";
 import { BookOpen, Code2, Users2, Loader2 } from "lucide-react";
 import DynamicIcon from "@/components/DynamicIcon";
+import PageLoader from "@/app/_components/PageLoader";
 
 const SkillsPage = () => {
   const [clickedSkillId, setClickedSkillId] = useState<string | null>(null);
@@ -59,14 +60,7 @@ const SkillsPage = () => {
   ];
 
   if (isLoading) {
-    return (
-      <div className="bg-white dark:bg-black min-h-screen flex flex-col items-center justify-center text-black dark:text-white">
-        <div className="relative w-16 h-16 mb-4">
-          <Loader2 className="w-full h-full text-zinc-400 dark:text-zinc-500 animate-spin" strokeWidth={1} />
-        </div>
-        <p className="text-zinc-500 dark:text-zinc-400 text-lg font-medium tracking-wide">Loading skills...</p>
-      </div>
-    );
+    return <PageLoader message="Loading skills" />;
   }
 
   return (

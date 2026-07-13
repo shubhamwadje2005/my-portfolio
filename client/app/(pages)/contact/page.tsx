@@ -5,6 +5,7 @@ import { useGetAboutQuery } from "@/redux/api/about.api";
 import { useCreateContactMutation } from "@/redux/api/contact.api";
 import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Instagram, Send, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
+import PageLoader from "@/app/_components/PageLoader";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
@@ -63,14 +64,7 @@ const ContactPage = () => {
     }, []);
 
     if (isLoading) {
-        return (
-            <div className="bg-white dark:bg-black min-h-screen flex flex-col items-center justify-center text-black dark:text-white">
-                <div className="relative w-16 h-16 mb-4">
-                    <Loader2 className="w-full h-full text-zinc-400 dark:text-zinc-500 animate-spin" strokeWidth={1} />
-                </div>
-                <p className="text-zinc-500 dark:text-zinc-400 text-lg font-medium tracking-wide">Loading contact info...</p>
-            </div>
-        );
+        return <PageLoader message="Loading contact info" />;
     }
 
     const onSubmit = async (data: ContactFormData) => {

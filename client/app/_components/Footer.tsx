@@ -141,8 +141,13 @@ const Footer = () => {
 
     if (isLoading) {
         return (
-            <footer className="bg-black text-white py-10 text-center">
-                Loading...
+            <footer className="bg-black text-white py-10 text-center flex items-center justify-center">
+                Loading
+                <span className="inline-flex ml-1">
+                    <span className="animate-pulse-dot">.</span>
+                    <span className="animate-pulse-dot delay-150">.</span>
+                    <span className="animate-pulse-dot delay-300">.</span>
+                </span>
             </footer>
         )
     }
