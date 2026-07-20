@@ -36,6 +36,8 @@ const ContactPage = () => {
     });
 
     useEffect(() => {
+        if (isLoading) return;
+
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
@@ -61,7 +63,7 @@ const ContactPage = () => {
             observer.disconnect();
             clearTimeout(t);
         };
-    }, []);
+    }, [isLoading]);
 
     if (isLoading) {
         return <PageLoader message="Loading contact info" />;
