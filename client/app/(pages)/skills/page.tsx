@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useGetSkillQuery } from "@/redux/api/skill.api";
 import { BookOpen, Code2, Users2, Loader2 } from "lucide-react";
 import DynamicIcon from "@/components/DynamicIcon";
 import PageLoader from "@/app/_components/PageLoader";
 
 const SkillsPage = () => {
-  const [clickedSkillId, setClickedSkillId] = useState<string | null>(null);
   const { data: skillData, isLoading } = useGetSkillQuery();
   const skills = skillData?.result || [];
 
@@ -136,15 +135,10 @@ const SkillsPage = () => {
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-24">
           {skills?.map((skill, index) => {
-            const isClicked = clickedSkillId === skill._id;
             return (
               <div
                 key={skill._id}
-                onClick={() => setClickedSkillId(isClicked ? null : skill._id)}
-                className={`bg-white dark:bg-[#0a0a0a] border rounded-xl h-32 md:h-40 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-pointer group p-4 shadow-sm select-none opacity-0 animate-reveal-up hover:-translate-y-1.5 hover:scale-[1.03] hover:shadow-md active:scale-[1.06] active:-translate-y-3 ${isClicked
-                    ? "scale-[1.06] -translate-y-3 border-orange-500 shadow-xl dark:border-orange-500"
-                    : "border-zinc-200 dark:border-zinc-800/50 hover:border-zinc-300 dark:hover:border-zinc-700"
-                  }`}
+                className="bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800/50 rounded-xl h-32 md:h-40 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-pointer group p-4 shadow-sm select-none opacity-0 animate-reveal-up hover:-translate-y-1.5 hover:scale-[1.03] hover:shadow-md active:scale-[1.06] active:-translate-y-3 hover:border-zinc-300 dark:hover:border-zinc-700"
                 style={{ animationDelay: `${0.2 + index * 0.05}s`, transitionDelay: `${0.2 + index * 0.05}s` }}
               >
                 {skill.icon && (
