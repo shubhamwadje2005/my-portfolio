@@ -176,7 +176,7 @@ const AboutPage = () => {
                         </div>
 
                         {/* Floating Icon - Same to Same Design with New Height */}
-                        <div className="absolute -bottom-5 -right-3 -md:bottom-5 md:-right-6 w-24 h-24 md:w-32 md:h-32 bg-white dark:bg-black rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 p-2 transition-colors duration-300">
+                        <div className="absolute -bottom-5 right-1 md:-right-6 w-24 h-24 md:w-32 md:h-32 bg-white dark:bg-black rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(0,0,0,0.1)] z-10 p-2 transition-colors duration-300">
                             {/* Inner Circle with Icon */}
                             <div className="w-full h-full bg-[#e5e7eb] dark:bg-zinc-800 rounded-full flex items-center justify-center border-[6px] md:border-[8px] border-white dark:border-black">
                                 <User
@@ -188,17 +188,15 @@ const AboutPage = () => {
                         </div>
                     </div>
 
-
-
                     <div className="flex flex-col animate-reveal-right">
-                        <div className="bg-zinc-100 dark:bg-[#1a1a1a] border border-zinc-200 dark:border-zinc-800/60 p-1 rounded-xl flex gap-1 mb-8 md:mb-10 w-full md:w-max">
+                        <div className="bg-zinc-100 dark:bg-[#1a1a1a] border border-zinc-200 dark:border-zinc-800/60 p-1.5 rounded-xl flex flex-col sm:flex-row gap-1 mb-8 md:mb-10 w-full md:w-max">
                             {tabs.map((tab) => (
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
-                                    className={`flex-1 md:flex-initial px-2 sm:px-4 md:px-8 lg:px-16 py-2.5 rounded-lg text-sm font-bold
+                                    className={`w-full sm:w-auto px-4 md:px-8 lg:px-16 py-2.5 rounded-lg text-sm font-bold transition-all
                                          ${activeTab === tab
-                                            ? "bg-white dark:bg-black text-black dark:text-white  border border-zinc-200 dark:border-zinc-700"
+                                            ? "bg-white dark:bg-black text-black dark:text-white border border-zinc-200 dark:border-zinc-700 shadow-sm"
                                             : "text-zinc-500 hover:text-black dark:hover:text-zinc-300"
                                         }`}
                                 >
@@ -264,11 +262,11 @@ const AboutPage = () => {
                                             >
                                                 <div className="flex items-center gap-3 mb-2">
                                                     <GraduationCap size={24} className="text-orange-500 flex-shrink-0" />
-                                                    <h3 className="text-lg md:text-xl font-bold">
+                                                    <h3 className="text-lg md:text-xl font-bold min-w-0 flex-1 break-words">
                                                         {edu.degree}
                                                     </h3>
                                                 </div>
-                                                <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base pl-1">
+                                                <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base pl-1 break-words">
                                                     {edu.university}, {edu.location}
                                                 </p>
                                             </div>

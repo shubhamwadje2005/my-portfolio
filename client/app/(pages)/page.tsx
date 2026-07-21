@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Download, Github, Linkedin, ArrowRight, ChevronDown, Loader2 } from "lucide-react";
+import { Download, Github, Linkedin, ArrowRight, ChevronDown, Loader2, ExternalLink } from "lucide-react";
 import { useGetAboutQuery } from "@/redux/api/about.api";
 import { useGetStatusQuery } from "@/redux/api/status.api";
 import { useGetProjectQuery } from "@/redux/api/project.api";
@@ -172,10 +172,10 @@ const Home = () => {
             </p>
 
             {/* Buttons */}
-            <div className="flex flex-wrap gap-4 mt-8">
+            <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <Link
                 href="/contact"
-                className="bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-md font-medium flex items-center gap-2 hover:bg-zinc-800 dark:hover:bg-gray-200 transition shadow-xl active:scale-95 group"
+                className="w-full sm:w-auto bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-md font-medium flex items-center justify-center gap-2 hover:bg-zinc-800 dark:hover:bg-gray-200 transition shadow-xl active:scale-95 group text-center"
               >
                 Get in Touch   <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
               </Link>
@@ -183,7 +183,7 @@ const Home = () => {
               <a
                 href="/Shubham_Wadje_Resume.pdf"
                 download="Shubham_Wadje_Resume.pdf"
-                className="border border-zinc-200 dark:border-gray-700 px-6 py-2.5 rounded-md font-medium flex items-center gap-2 hover:bg-zinc-100 dark:hover:bg-gray-900 transition text-zinc-600 dark:text-gray-200 shadow-xl active:scale-95 group"
+                className="w-full sm:w-auto border border-zinc-200 dark:border-gray-700 px-6 py-2.5 rounded-md font-medium flex items-center justify-center gap-2 hover:bg-zinc-100 dark:hover:bg-gray-900 transition text-zinc-600 dark:text-gray-200 shadow-xl active:scale-95 group text-center"
               >
                 <Download size={18} className="group-hover:translate-y-1 transition-transform duration-300" /> Download CV
               </a>
@@ -232,7 +232,7 @@ const Home = () => {
       </section >
 
       {/* About Me Section */}
-      <section className="bg-zinc-50 dark:bg-[#050505] text-black dark:text-white py-24 px-6 md:px-20 border-t border-zinc-100 dark:border-zinc-900" >
+      <section className="bg-zinc-50 dark:bg-[#050505] text-black dark:text-white py-24 px-6 md:px-20 border-t border-zinc-100 dark:border-zinc-900 overflow-hidden" >
         <div className="max-w-[1350px] mx-auto w-full">
 
           {/* Header */}
@@ -308,7 +308,7 @@ const Home = () => {
 
 
       {/* project section */}
-      <section className="bg-white dark:bg-black text-black dark:text-white py-24 px-6 md:px-10 border-t border-zinc-100 dark:border-zinc-900">
+      <section className="bg-white dark:bg-black text-black dark:text-white py-24 px-6 md:px-10 border-t border-zinc-100 dark:border-zinc-900 overflow-hidden">
         <div className="max-w-[1600px] mx-auto w-full">
 
           {/* Header */}
@@ -375,20 +375,21 @@ const Home = () => {
                   </div>
 
                   {/* Links */}
-                  <div className="flex flex-wrap gap-4 pt-2">
+                  <div className="flex flex-col sm:flex-row gap-3 pt-2">
                     <Link
                       href={project.liveUrl || "#"}
                       target="_blank"
-                      className="bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-lg font-semibold text-[15px] hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all active:scale-95"
+                      className="flex-1 bg-black dark:bg-white text-white dark:text-black text-xs whitespace-nowrap font-black py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all active:scale-95 shadow-md"
                     >
+                      <ExternalLink size={14} />
                       Live Demo
                     </Link>
                     <Link
                       href={project.githubUrl || "#"}
                       target="_blank"
-                      className="bg-zinc-100 dark:bg-black border border-zinc-200 dark:border-zinc-800 text-black dark:text-white px-6 py-2.5 rounded-lg font-semibold text-[15px] flex items-center gap-2 hover:bg-zinc-200 dark:hover:bg-[#1a1a1a] transition-all active:scale-95"
+                      className="flex-1 bg-zinc-100 dark:bg-[#1a1a1a] border border-zinc-200 dark:border-zinc-800 text-black dark:text-white text-xs whitespace-nowrap font-black py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all active:scale-95 shadow-sm"
                     >
-                      <Github size={20} />
+                      <Github size={14} />
                       GitHub
                     </Link>
                   </div>

@@ -70,10 +70,10 @@ const Navbar = () => {
         <>
             <nav className={`w-full fixed top-0 left-0 transition-all duration-300 z-[9999] ${isMenuOpen ? "bg-white dark:bg-black" : "bg-white/70 dark:bg-black/70 backdrop-blur-xl border-b border-zinc-200 dark:border-zinc-800/50"} animate-slide-down`}>
 
-                <div className="max-w-[1450px] mx-auto flex items-center justify-between px-6 py-4 md:py-5 relative">
+                <div className="max-w-[1450px] mx-auto flex items-center justify-between px-4 md:px-6 py-3.5 md:py-5 relative">
                     {/* Logo */}
                     <Link href="/" className="z-[110]" onClick={() => setIsMenuOpen(false)}>
-                        <img src="/shubham.png" alt="Logo" className="h-8 md:h-10 w-auto invert dark:invert-0" />
+                        <img src="/shubham.png" alt="Logo" className="h-6 md:h-9 w-auto invert dark:invert-0" />
                     </Link>
 
                     {/* Desktop Menu */}
@@ -91,19 +91,19 @@ const Navbar = () => {
                     </ul>
 
                     {/* Right Actions */}
-                    <div className="flex items-center gap-4 md:gap-6 relative z-[110]">
+                    <div className="flex items-center gap-2 md:gap-6 relative z-[110]">
                         {/* Theme Switcher */}
                         <div className="relative" ref={actionsRef}>
                             <button
                                 onClick={() => setIsThemeOpen(!isThemeOpen)}
-                                className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-all flex items-center gap-2 border border-zinc-200 dark:border-zinc-800"
+                                className="p-2 rounded-xl bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-all flex items-center gap-1 md:gap-2 border border-zinc-200 dark:border-zinc-800"
                             >
                                 <ThemeIcon />
-                                <ChevronDown size={14} className={`transition-transform duration-300 ${isThemeOpen ? 'rotate-180' : ''}`} />
+                                <ChevronDown size={14} className={`hidden md:block transition-transform duration-300 ${isThemeOpen ? 'rotate-180' : ''}`} />
                             </button>
 
-                            {isThemeOpen && (
-                                <div className="absolute right-0 top-[110%] mt-2 w-48 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl p-2 z-[999999] block opacity-100">
+                             {isThemeOpen && (
+                                <div className="absolute right-0 top-[110%] mt-2 w-36 md:w-48 bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl md:rounded-2xl shadow-2xl p-1.5 md:p-2 z-[999999] block opacity-100">
                                     {[
                                         { name: 'Light', icon: <Sun size={16} />, val: 'light' },
                                         { name: 'Dark', icon: <Moon size={16} />, val: 'dark' },
@@ -112,7 +112,7 @@ const Navbar = () => {
                                         <button
                                             key={t.val}
                                             onClick={() => { setTheme(t.val); setIsThemeOpen(false); }}
-                                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${theme === t.val ? 'bg-orange-500 text-white' : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-black dark:hover:text-white'}`}
+                                            className={`w-full flex items-center gap-2 md:gap-3 px-3 py-2 md:px-4 md:py-3 rounded-lg md:rounded-xl text-sm font-bold transition-all ${theme === t.val ? 'bg-orange-500 text-white' : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900 hover:text-black dark:hover:text-white'}`}
                                         >
                                             {t.icon}
                                             {t.name}
@@ -130,7 +130,7 @@ const Navbar = () => {
             </nav>
 
             {/* Mobile Menu Overlay — z-index below nav so navbar stays visible */}
-            <div className={`lg:hidden fixed inset-0 z-[9998] bg-white dark:bg-black transition-all duration-500 transform ${isMenuOpen ? "translate-x-0" : "translate-x-full"}`}>
+            <div className={`lg:hidden fixed inset-0 z-[9998] bg-white dark:bg-black transition-all duration-500 transform ${isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0 pointer-events-none invisible"}`}>
                 <div className="flex flex-col h-full justify-evenly items-center py-20 px-10">
                     {navLinks.map((link, index) => (
                         <Link

@@ -109,10 +109,16 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html, body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    position: relative;
+    width: 100% !important;
+  }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground;
   }
   html {
-    @apply font-sans overflow-x-hidden;
+    @apply font-sans;
   }
 }

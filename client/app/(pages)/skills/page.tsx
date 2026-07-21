@@ -158,14 +158,14 @@ const SkillsPage = () => {
           })}
         </div>
         {/* Learning Approach Section */}
-        <div className="border border-zinc-200 dark:border-zinc-800/60 rounded-3xl p-8 md:p-12 bg-zinc-50 dark:bg-[#050505] opacity-0 animate-reveal-up shadow-lg" style={{ animationDelay: '0.8s', transitionDelay: '0.8s' }}>
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-orange-500">
+        <div className="border border-zinc-200 dark:border-zinc-800/60 rounded-3xl p-5 md:p-12 bg-zinc-50 dark:bg-[#050505] opacity-0 animate-reveal-up shadow-lg" style={{ animationDelay: '0.8s', transitionDelay: '0.8s' }}>
+          <div className="flex items-center gap-3 md:gap-4 mb-8">
+            <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-orange-500 flex-shrink-0">
               <BookOpen size={24} />
             </div>
-            <div>
-              <h2 className="text-2xl font-black text-black dark:text-white">My Learning Approach</h2>
-              <p className="text-zinc-500 text-sm">How I stay updated with the latest technologies</p>
+            <div className="min-w-0 flex-1">
+              <h2 className="text-xl md:text-2xl font-black text-black dark:text-white break-words">My Learning Approach</h2>
+              <p className="text-zinc-500 text-xs md:text-sm break-words">How I stay updated with the latest technologies</p>
             </div>
           </div>
 
@@ -175,8 +175,8 @@ const SkillsPage = () => {
                 <div className="w-12 h-12 rounded-xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center">
                   {item.icon}
                 </div>
-                <h3 className="text-lg font-bold text-black dark:text-white">{item.title}</h3>
-                <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
+                <h3 className="text-lg font-bold text-black dark:text-white break-words">{item.title}</h3>
+                <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed break-words">
                   {item.description}
                 </p>
               </div>

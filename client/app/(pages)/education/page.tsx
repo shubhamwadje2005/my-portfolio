@@ -115,12 +115,12 @@ const EducationPage = () => {
                 </div>
 
                 {/* Main Container */}
-                <div className="bg-zinc-50 dark:bg-[#050505] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl p-8 md:p-12 shadow-2xl space-y-12 animate-reveal-up">
+                <div className="bg-zinc-50 dark:bg-[#050505] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl p-5 md:p-12 shadow-2xl space-y-12 animate-reveal-up">
                     <div className="flex flex-col gap-10">
                         {education.map((edu, index) => (
                             <div 
                               key={edu._id} 
-                              className="flex items-start gap-6 group opacity-0 animate-reveal-up"
+                              className="flex items-start gap-3 md:gap-6 group opacity-0 animate-reveal-up"
                               style={{ animationDelay: `${0.2 + index * 0.2}s`, transitionDelay: `${0.2 + index * 0.2}s` }}
                             >
                                 {/* Graduation Icon */}
@@ -129,11 +129,11 @@ const EducationPage = () => {
                                 </div>
 
                                 {/* Content Area */}
-                                <div className="space-y-2">
-                                    <h2 className="text-xl md:text-2xl font-black text-black dark:text-white group-hover:text-orange-500 transition-colors tracking-tight">
+                                <div className="min-w-0 flex-1 space-y-2">
+                                    <h2 className="text-xl md:text-2xl font-black text-black dark:text-white group-hover:text-orange-500 transition-colors tracking-tight break-words">
                                         {edu.degree}
                                     </h2>
-                                    <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base font-medium leading-relaxed">
+                                    <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base font-medium leading-relaxed break-words">
                                         {edu.university}{edu.location ? `, ${edu.location}` : ""}
                                     </p>
                                     <div className="flex items-center gap-2 text-zinc-500 text-xs md:text-sm font-semibold pt-1">

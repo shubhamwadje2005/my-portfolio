@@ -171,7 +171,7 @@ const ContactPage = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
 
                     {/* Left Column: Get In Touch */}
-                    <div className="bg-zinc-50 dark:bg-[#050505] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl p-8 md:p-10 shadow-2xl animate-reveal-left" style={{ animationDelay: '0.2s', transitionDelay: '0.2s' }}>
+                    <div className="bg-zinc-50 dark:bg-[#050505] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl p-5 md:p-10 shadow-2xl animate-reveal-left" style={{ animationDelay: '0.2s', transitionDelay: '0.2s' }}>
                         <div className="space-y-10">
                             <div>
                                 <h2 className="text-2xl font-black mb-8 tracking-tight text-black dark:text-white">Get In Touch</h2>
@@ -196,7 +196,7 @@ const ContactPage = () => {
                                         </div>
                                     </div> */}
                                     <div
-                                        className="flex items-center gap-5 group cursor-pointer"
+                                        className="flex items-center gap-3 md:gap-5 group cursor-pointer"
                                         onClick={() => {
                                             if (personal?.email) {
                                                 window.location.href = `mailto:${personal.email}`
@@ -205,15 +205,15 @@ const ContactPage = () => {
                                             }
                                         }}
                                     >
-                                        <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 group-hover:text-orange-500 group-hover:border-orange-500/50 transition-all duration-300 shadow-sm">
+                                        <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 group-hover:text-orange-500 group-hover:border-orange-500/50 transition-all duration-300 shadow-sm flex-shrink-0">
                                             <Mail size={22} />
                                         </div>
 
-                                        <div>
+                                        <div className="min-w-0 flex-1">
                                             <p className="text-sm font-bold text-black dark:text-white mb-0.5">
                                                 Email
                                             </p>
-                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base">
+                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base break-all">
                                                 {personal?.email || "example@gmail.com"}
                                             </p>
                                         </div>
@@ -221,7 +221,7 @@ const ContactPage = () => {
 
                                     {/* 📞 PHONE CARD */}
                                     <div
-                                        className="flex items-center gap-5 group cursor-pointer"
+                                        className="flex items-center gap-3 md:gap-5 group cursor-pointer"
                                         onClick={() => {
                                             if (personal?.phone) {
                                                 window.location.href = `tel:+91${personal.phone}`
@@ -230,27 +230,27 @@ const ContactPage = () => {
                                             }
                                         }}
                                     >
-                                        <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 group-hover:text-orange-500 group-hover:border-orange-500/50 transition-all duration-300 shadow-sm">
+                                        <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 group-hover:text-orange-500 group-hover:border-orange-500/50 transition-all duration-300 shadow-sm flex-shrink-0">
                                             <Phone size={22} />
                                         </div>
 
-                                        <div>
+                                        <div className="min-w-0 flex-1">
                                             <p className="text-sm font-bold text-black dark:text-white mb-0.5">
                                                 Phone
                                             </p>
-                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base">
+                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base break-all">
                                                 +91-{personal?.phone || "XXXXXXXXXX"}
                                             </p>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-5 group">
-                                        <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 group-hover:text-orange-500 group-hover:border-orange-500/50 transition-all duration-300 shadow-sm">
+                                    <div className="flex items-center gap-3 md:gap-5 group">
+                                        <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 group-hover:text-orange-500 group-hover:border-orange-500/50 transition-all duration-300 shadow-sm flex-shrink-0">
                                             <MapPin size={22} />
                                         </div>
-                                        <div>
+                                        <div className="min-w-0 flex-1">
                                             <p className="text-sm font-bold text-black dark:text-white mb-0.5">Location</p>
-                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base line-clamp-2 md:line-clamp-none">
+                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base line-clamp-2 md:line-clamp-none break-words">
                                                 {personal?.location || "Chhatrapati Sambhajinagar, Maharashtra, India"}
                                             </p>
                                         </div>
@@ -281,7 +281,7 @@ const ContactPage = () => {
                     </div>
 
                     {/* Right Column: Send Me a Message */}
-                    <div className="bg-zinc-50 dark:bg-[#050505] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl p-8 md:p-12 shadow-2xl animate-reveal-right" style={{ animationDelay: '0.4s', transitionDelay: '0.4s' }}>
+                    <div className="bg-zinc-50 dark:bg-[#050505] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl p-5 md:p-12 shadow-2xl animate-reveal-right" style={{ animationDelay: '0.4s', transitionDelay: '0.4s' }}>
                         <h2 className="text-2xl font-black mb-8 tracking-tight text-black dark:text-white">Send Me a Message</h2>
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                             <div className="grid grid-cols-1 gap-6">

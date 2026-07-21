@@ -4,6 +4,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { TouchableOpacity, StyleSheet, View, Image, Platform } from 'react-native';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Import Screens
 import HomeScreen from '../pages/HomeScreen';
@@ -20,6 +21,7 @@ interface AppNavigatorProps {
 }
 
 const AppNavigator: React.FC<AppNavigatorProps> = ({ isDark, onToggleTheme }) => {
+  const insets = useSafeAreaInsets();
   const colors = {
     background: isDark ? '#000000' : '#F8F9FA',
     card: isDark ? '#1C1C1E' : '#FFFFFF',
@@ -69,8 +71,8 @@ const AppNavigator: React.FC<AppNavigatorProps> = ({ isDark, onToggleTheme }) =>
           tabBarStyle: {
             backgroundColor: colors.card,
             borderTopColor: colors.border,
-            height: 60,
-            paddingBottom: 8,
+            height: Platform.OS === 'web' ? 65 : 64 + insets.bottom,
+            paddingBottom: insets.bottom > 0 ? insets.bottom : 8,
             paddingTop: 8,
           },
           headerBackground: () => (
