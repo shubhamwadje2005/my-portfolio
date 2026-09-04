@@ -191,6 +191,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ isDark }) => {
           colors={[colors.primary]}
           tintColor={colors.primary}
         />
+
       }
     >
       {/* Hero Section */}
@@ -225,6 +226,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ isDark }) => {
             <TouchableOpacity
               style={[styles.socialButton, { backgroundColor: isDark ? '#27272A' : '#F3F4F6' }]}
               onPress={() => openUrl("https://www.linkedin.com/in/shubham-wadje-916a31317")}
+
             >
               <MaterialCommunityIcons name="linkedin" size={22} color={colors.primary} />
             </TouchableOpacity>
@@ -243,6 +245,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ isDark }) => {
             onPress={handlePress}
             onPressIn={handlePressIn}
             onPressOut={handlePressOut}
+
           >
             <Animated.View
               style={[
