@@ -181,8 +181,8 @@ const Home = () => {
               </Link>
 
               <a
-                href="/Shubham_Wadje_Resume.pdf"
-                download="Shubham_Wadje_Resume.pdf"
+                href="/Shubham_Wadje.pdf"
+                download="Shubham_Wadje.pdf"
                 className="w-full sm:w-auto border border-zinc-200 dark:border-gray-700 px-6 py-2.5 rounded-md font-medium flex items-center justify-center gap-2 hover:bg-zinc-100 dark:hover:bg-gray-900 transition text-zinc-600 dark:text-gray-200 shadow-xl active:scale-95 group text-center"
               >
                 <Download size={18} className="group-hover:translate-y-1 transition-transform duration-300" /> Download CV

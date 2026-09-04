@@ -98,8 +98,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ isDark }) => {
     );
     spinRotation.current.start();
 
+
+    // resume downloading
     setTimeout(() => {
-      openUrl("https://my-portfolio-one-peach-72.vercel.app/Shubham_Wadje_Resume.pdf");
+      openUrl("https://my-portfolio-one-peach-72.vercel.app/Shubham_Wadje.pdf");
       if (spinRotation.current) {
         spinRotation.current.stop();
       }
