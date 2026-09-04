@@ -198,11 +198,8 @@ const ContactPage = () => {
                                     <div
                                         className="flex items-center gap-3 md:gap-5 group cursor-pointer"
                                         onClick={() => {
-                                            if (personal?.email) {
-                                                window.location.href = `mailto:${personal.email}`
-                                            } else {
-                                                alert("Email not available")
-                                            }
+                                            const email = personal?.email || "shubhamwadje2005@gmail.com";
+                                            window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(email)}`, "_blank");
                                         }}
                                     >
                                         <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 group-hover:text-orange-500 group-hover:border-orange-500/50 transition-all duration-300 shadow-sm flex-shrink-0">
@@ -213,8 +210,8 @@ const ContactPage = () => {
                                             <p className="text-sm font-bold text-black dark:text-white mb-0.5">
                                                 Email
                                             </p>
-                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base break-all">
-                                                {personal?.email || "example@gmail.com"}
+                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base break-all group-hover:text-orange-500 transition-colors">
+                                                {personal?.email || "shubhamwadje2005@gmail.com"}
                                             </p>
                                         </div>
                                     </div>
@@ -223,11 +220,8 @@ const ContactPage = () => {
                                     <div
                                         className="flex items-center gap-3 md:gap-5 group cursor-pointer"
                                         onClick={() => {
-                                            if (personal?.phone) {
-                                                window.location.href = `tel:+91${personal.phone}`
-                                            } else {
-                                                alert("Phone number not available")
-                                            }
+                                            const phone = personal?.phone || "9028725948";
+                                            window.location.href = `tel:+91${phone}`;
                                         }}
                                     >
                                         <div className="w-12 h-12 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 group-hover:text-orange-500 group-hover:border-orange-500/50 transition-all duration-300 shadow-sm flex-shrink-0">
@@ -238,8 +232,8 @@ const ContactPage = () => {
                                             <p className="text-sm font-bold text-black dark:text-white mb-0.5">
                                                 Phone
                                             </p>
-                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base break-all">
-                                                +91-{personal?.phone || "XXXXXXXXXX"}
+                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base break-all group-hover:text-orange-500 transition-colors">
+                                                +91-{personal?.phone || "9028725948"}
                                             </p>
                                         </div>
                                     </div>

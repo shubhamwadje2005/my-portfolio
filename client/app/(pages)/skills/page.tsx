@@ -133,30 +133,38 @@ const SkillsPage = () => {
           <div className="h-1 bg-black dark:bg-white mt-6 rounded-full animate-expand-line"></div>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-24">
-          {skills?.map((skill, index) => {
-            return (
-              <div
-                key={skill._id}
-                className="bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800/50 rounded-xl h-32 md:h-40 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-pointer group p-4 shadow-sm select-none opacity-0 animate-reveal-up hover:-translate-y-1.5 hover:scale-[1.03] hover:shadow-md active:scale-[1.06] active:-translate-y-3 hover:border-zinc-300 dark:hover:border-zinc-700"
-                style={{ animationDelay: `${0.2 + index * 0.05}s`, transitionDelay: `${0.2 + index * 0.05}s` }}
-              >
-                {skill.icon && (
-                  <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
-                    <DynamicIcon
-                      iconName={skill.icon}
-                      className="text-2xl md:text-3xl filter grayscale group-hover:grayscale-0 transition-all"
-                    />
-                  </div>
-                )}
+        {skills && skills.length > 0 ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mb-24">
+            {skills.map((skill, index) => {
+              return (
+                <div
+                  key={skill._id}
+                  className="bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800/50 rounded-xl h-32 md:h-40 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-pointer group p-4 shadow-sm select-none opacity-0 animate-reveal-up hover:-translate-y-1.5 hover:scale-[1.03] hover:shadow-md active:scale-[1.06] active:-translate-y-3 hover:border-zinc-300 dark:hover:border-zinc-700"
+                  style={{ animationDelay: `${0.2 + index * 0.05}s`, transitionDelay: `${0.2 + index * 0.05}s` }}
+                >
+                  {skill.icon && (
+                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
+                      <DynamicIcon
+                        iconName={skill.icon}
+                        className="text-2xl md:text-3xl filter grayscale group-hover:grayscale-0 transition-all"
+                      />
+                    </div>
+                  )}
 
-                <span className="text-zinc-600 dark:text-zinc-300 font-bold text-sm md:text-base group-hover:text-black dark:group-hover:text-white transition-colors text-center">
-                  {skill.skillName}
-                </span>
-              </div>
-            );
-          })}
-        </div>
+                  <span className="text-zinc-600 dark:text-zinc-300 font-bold text-sm md:text-base group-hover:text-black dark:group-hover:text-white transition-colors text-center">
+                    {skill.skillName}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-16 px-4 text-center bg-zinc-50 dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl mb-24 animate-reveal-up shadow-sm">
+            <Code2 size={36} className="text-orange-500 mb-3" />
+            <h3 className="text-xl font-bold text-black dark:text-white mb-1">No Skills Found</h3>
+            <p className="text-zinc-500 dark:text-zinc-400 text-sm">Skills will appear here once added.</p>
+          </div>
+        )}
         {/* Learning Approach Section */}
         <div className="border border-zinc-200 dark:border-zinc-800/60 rounded-3xl p-5 md:p-12 bg-zinc-50 dark:bg-[#050505] opacity-0 animate-reveal-up shadow-lg" style={{ animationDelay: '0.8s', transitionDelay: '0.8s' }}>
           <div className="flex items-center gap-3 md:gap-4 mb-8">

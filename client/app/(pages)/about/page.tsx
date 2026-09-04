@@ -299,25 +299,33 @@ const AboutPage = () => {
                                         </div>
                                     </div>
 
-                                    <div className="bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-100 dark:border-zinc-800 rounded-xl p-4 md:p-5 flex items-start gap-3 md:gap-4 shadow-sm hover:shadow-md transition-shadow">
-                                        <Mail size={20} className="text-orange-500 mt-1 md:w-6 md:h-6 flex-shrink-0" />
+                                    <a
+                                        href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(about.personal?.[0]?.email || "shubhamwadje2005@gmail.com")}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-100 dark:border-zinc-800 rounded-xl p-4 md:p-5 flex items-start gap-3 md:gap-4 shadow-sm hover:shadow-md transition-all group cursor-pointer"
+                                    >
+                                        <Mail size={20} className="text-orange-500 mt-1 md:w-6 md:h-6 flex-shrink-0 group-hover:scale-110 transition-transform" />
                                         <div>
                                             <h4 className="font-semibold mb-1 text-sm md:text-base">Email</h4>
-                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base break-all">
-                                                {about.personal?.[0]?.email || "komalkshirasagar32009@gmail.com"}
+                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base break-all group-hover:text-orange-500 transition-colors">
+                                                {about.personal?.[0]?.email || "shubhamwadje2005@gmail.com"}
                                             </p>
                                         </div>
-                                    </div>
+                                    </a>
 
-                                    <div className="bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-100 dark:border-zinc-800 rounded-xl p-4 md:p-5 flex items-start gap-3 md:gap-4 shadow-sm hover:shadow-md transition-shadow">
-                                        <Phone size={20} className="text-orange-500 mt-1 md:w-6 md:h-6 flex-shrink-0" />
+                                    <a
+                                        href={`tel:+91${about.personal?.[0]?.phone || "9028725948"}`}
+                                        className="bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-100 dark:border-zinc-800 rounded-xl p-4 md:p-5 flex items-start gap-3 md:gap-4 shadow-sm hover:shadow-md transition-all group cursor-pointer"
+                                    >
+                                        <Phone size={20} className="text-orange-500 mt-1 md:w-6 md:h-6 flex-shrink-0 group-hover:scale-110 transition-transform" />
                                         <div>
                                             <h4 className="font-semibold mb-1 text-sm md:text-base">Phone</h4>
-                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base">
-                                                {about.personal?.[0]?.phone || "+91-8080211162"}
+                                            <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-base group-hover:text-orange-500 transition-colors">
+                                                +91-{about.personal?.[0]?.phone || "9028725948"}
                                             </p>
                                         </div>
-                                    </div>
+                                    </a>
 
                                     <div className="sm:col-span-2 bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-100 dark:border-zinc-800 rounded-xl p-4 md:p-5 shadow-sm">
                                         <h4 className="font-semibold mb-3 text-sm md:text-base">Languages</h4>

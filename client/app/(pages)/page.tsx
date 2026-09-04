@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Download, Github, Linkedin, ArrowRight, ChevronDown, Loader2, ExternalLink } from "lucide-react";
+import { Download, Github, Linkedin, Mail, ArrowRight, ChevronDown, Loader2, ExternalLink } from "lucide-react";
 import { useGetAboutQuery } from "@/redux/api/about.api";
 import { useGetStatusQuery } from "@/redux/api/status.api";
 import { useGetProjectQuery } from "@/redux/api/project.api";
@@ -201,10 +201,19 @@ const Home = () => {
               </Link>
               <Link
                 href="https://www.linkedin.com/in/shubham-wadje-916a31317"
+                target="_blank"
                 className="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-400 dark:text-zinc-500 hover:text-white hover:border-orange-500 hover:bg-orange-500/10 transition-all duration-300 shadow-sm"
               >
                 <Linkedin size={20} />
               </Link>
+              <a
+                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(about?.personal?.[0]?.email || "shubhamwadje2005@gmail.com")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-400 dark:text-zinc-500 hover:text-white hover:border-orange-500 hover:bg-orange-500/10 transition-all duration-300 shadow-sm"
+              >
+                <Mail size={20} />
+              </a>
             </div>
           </div>
 
@@ -319,84 +328,90 @@ const Home = () => {
           </div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
-            {projects?.slice(0, 2).map((project, index) => (
-              <div
-                key={project._id}
-                className={`bg-zinc-50 dark:bg-[#0d0d0d] border border-zinc-200 dark:border-zinc-800/40 rounded-3xl overflow-hidden opacity-0 ${index % 2 === 0 ? "animate-reveal-left" : "animate-reveal-right"
-                  }`}
-                style={{ animationDelay: `${index * 0.3}s`, transitionDelay: `${index * 0.3}s` }}
-              >
-                {/* Image Container */}
-                <div className="relative h-60 md:h-72 w-full overflow-hidden">
-                  <Image
-                    src={project.imageUrl || "/project-placeholder.jpg"}
-                    alt={project.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-500 hover:scale-105"
-                  />
+          {projects && projects.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+              {projects.slice(0, 2).map((project, index) => (
+                <div
+                  key={project._id}
+                  className={`bg-zinc-50 dark:bg-[#0d0d0d] border border-zinc-200 dark:border-zinc-800/40 rounded-3xl overflow-hidden opacity-0 ${index % 2 === 0 ? "animate-reveal-left" : "animate-reveal-right"
+                    }`}
+                  style={{ animationDelay: `${index * 0.3}s`, transitionDelay: `${index * 0.3}s` }}
+                >
+                  {/* Image Container */}
+                  <div className="relative h-60 md:h-72 w-full overflow-hidden">
+                    <Image
+                      src={project.imageUrl || "/project-placeholder.jpg"}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-8 md:p-10 space-y-6">
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold flex items-center gap-2 text-black dark:text-white">
+                        {project.title.toLowerCase().includes("whatsapp") && <span className="text-green-500">{"\uD83D\uDCE2"}</span>}
+                        {project.title.toLowerCase().includes("krushi") && <span className="text-orange-500">{"\uD83E\uDEB4"}</span>}
+                        {project.title}
+                      </h3>
+                      <p className="text-zinc-600 dark:text-[#a1a1aa] text-[15px] leading-relaxed font-medium">
+                        {project.description}
+                      </p>
+                    </div>
+
+                    {/* Tech Stack */}
+                    <div className="flex flex-wrap gap-2 pb-2">
+                      {(() => {
+                        const rawData = Array.isArray(project.technologies)
+                          ? project.technologies
+                          : [project.technologies];
+
+                        const techList = rawData
+                          .flatMap(item => (typeof item === 'string' ? item.split(',') : item))
+                          .map(t => String(t).trim())
+                          .filter(t => t !== "" && t !== "undefined");
+
+                        return techList.map((tech, index) => (
+                          <span
+                            key={index}
+                            className="text-[13px] font-medium bg-zinc-200 dark:bg-[#18181b] text-zinc-800 dark:text-white px-2 py-0.2 rounded-full border border-zinc-300 dark:border-zinc-800/50 hover:bg-zinc-300 dark:hover:bg-[#27272a] transition-all cursor-default"
+                          >
+                            {tech}
+                          </span>
+                        ));
+                      })()}
+                    </div>
+
+                    {/* Links */}
+                    <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                      <Link
+                        href={project.liveUrl || "#"}
+                        target="_blank"
+                        className="flex-1 bg-black dark:bg-white text-white dark:text-black text-xs whitespace-nowrap font-black py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all active:scale-95 shadow-md"
+                      >
+                        <ExternalLink size={14} />
+                        Live Demo
+                      </Link>
+                      <Link
+                        href={project.githubUrl || "#"}
+                        target="_blank"
+                        className="flex-1 bg-zinc-100 dark:bg-[#1a1a1a] border border-zinc-200 dark:border-zinc-800 text-black dark:text-white text-xs whitespace-nowrap font-black py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all active:scale-95 shadow-sm"
+                      >
+                        <Github size={14} />
+                        GitHub
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-
-                {/* Content */}
-                <div className="p-8 md:p-10 space-y-6">
-                  <div className="space-y-4">
-                    <h3 className="text-2xl font-bold flex items-center gap-2 text-black dark:text-white">
-                      {project.title.toLowerCase().includes("whatsapp") && <span className="text-green-500">{"\uD83D\uDCE2"}</span>}
-                      {project.title.toLowerCase().includes("krushi") && <span className="text-orange-500">{"\uD83E\uDEB4"}</span>}
-                      {project.title}
-                    </h3>
-                    <p className="text-zinc-600 dark:text-[#a1a1aa] text-[15px] leading-relaxed font-medium">
-                      {project.description}
-                    </p>
-                  </div>
-
-                  {/* Tech Stack */}
-                  <div className="flex flex-wrap gap-2 pb-2">
-                    {(() => {
-                      const rawData = Array.isArray(project.technologies)
-                        ? project.technologies
-                        : [project.technologies];
-
-                      const techList = rawData
-                        .flatMap(item => (typeof item === 'string' ? item.split(',') : item))
-                        .map(t => String(t).trim())
-                        .filter(t => t !== "" && t !== "undefined");
-
-                      return techList.map((tech, index) => (
-                        <span
-                          key={index}
-                          className="text-[13px] font-medium bg-zinc-200 dark:bg-[#18181b] text-zinc-800 dark:text-white px-2 py-0.2 rounded-full border border-zinc-300 dark:border-zinc-800/50 hover:bg-zinc-300 dark:hover:bg-[#27272a] transition-all cursor-default"
-                        >
-                          {tech}
-                        </span>
-                      ));
-                    })()}
-                  </div>
-
-                  {/* Links */}
-                  <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                    <Link
-                      href={project.liveUrl || "#"}
-                      target="_blank"
-                      className="flex-1 bg-black dark:bg-white text-white dark:text-black text-xs whitespace-nowrap font-black py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all active:scale-95 shadow-md"
-                    >
-                      <ExternalLink size={14} />
-                      Live Demo
-                    </Link>
-                    <Link
-                      href={project.githubUrl || "#"}
-                      target="_blank"
-                      className="flex-1 bg-zinc-100 dark:bg-[#1a1a1a] border border-zinc-200 dark:border-zinc-800 text-black dark:text-white text-xs whitespace-nowrap font-black py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all active:scale-95 shadow-sm"
-                    >
-                      <Github size={14} />
-                      GitHub
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-16 px-4 text-center bg-zinc-50 dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl shadow-sm">
+              <p className="text-zinc-500 dark:text-zinc-400 font-medium">No featured projects available right now.</p>
+            </div>
+          )}
 
           {/* View All Button */}
           <div className="flex justify-center mt-20 opacity-0 animate-reveal-up delay-300">
@@ -425,36 +440,41 @@ const Home = () => {
           </div>
 
           {/* Staggered Dynamic Skills Grid */}
-          {/* Staggered Dynamic Skills Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-            {skills?.slice(0, 10).map((skill, index) => {
-              const isClicked = clickedSkillId === skill._id;
-              return (
-                <div
-                  key={skill._id}
-                  onClick={() => setClickedSkillId(isClicked ? null : skill._id)}
-                  className={`bg-white dark:bg-[#0a0a0a] border rounded-xl h-32 md:h-40 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-pointer group p-4 shadow-sm select-none opacity-0 animate-reveal-up hover:-translate-y-1.5 hover:scale-[1.03] hover:shadow-md active:scale-[1.06] active:-translate-y-3 ${isClicked
-                    ? "scale-[1.06] -translate-y-3 border-orange-500 shadow-xl dark:border-orange-500"
-                    : "border-zinc-200 dark:border-zinc-800/50 hover:border-zinc-300 dark:hover:border-zinc-700"
-                    }`}
-                  style={{ animationDelay: `${0.4 + index * 0.05}s`, transitionDelay: `${0.4 + index * 0.05}s` }}
-                >
-                  {skill.icon && (
-                    <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
-                      <DynamicIcon
-                        iconName={skill.icon}
-                        className="text-2xl md:text-3xl filter grayscale group-hover:grayscale-0 transition-all"
-                      />
-                    </div>
-                  )}
+          {skills && skills.length > 0 ? (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+              {skills.slice(0, 10).map((skill, index) => {
+                const isClicked = clickedSkillId === skill._id;
+                return (
+                  <div
+                    key={skill._id}
+                    onClick={() => setClickedSkillId(isClicked ? null : skill._id)}
+                    className={`bg-white dark:bg-[#0a0a0a] border rounded-xl h-32 md:h-40 flex flex-col items-center justify-center gap-3 transition-all duration-300 cursor-pointer group p-4 shadow-sm select-none opacity-0 animate-reveal-up hover:-translate-y-1.5 hover:scale-[1.03] hover:shadow-md active:scale-[1.06] active:-translate-y-3 ${isClicked
+                      ? "scale-[1.06] -translate-y-3 border-orange-500 shadow-xl dark:border-orange-500"
+                      : "border-zinc-200 dark:border-zinc-800/50 hover:border-zinc-300 dark:hover:border-zinc-700"
+                      }`}
+                    style={{ animationDelay: `${0.4 + index * 0.05}s`, transitionDelay: `${0.4 + index * 0.05}s` }}
+                  >
+                    {skill.icon && (
+                      <div className="w-10 h-10 flex items-center justify-center flex-shrink-0">
+                        <DynamicIcon
+                          iconName={skill.icon}
+                          className="text-2xl md:text-3xl filter grayscale group-hover:grayscale-0 transition-all"
+                        />
+                      </div>
+                    )}
 
-                  <span className="text-zinc-600 dark:text-zinc-300 font-bold text-sm md:text-base group-hover:text-black dark:group-hover:text-white transition-colors text-center">
-                    {skill.skillName}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
+                    <span className="text-zinc-600 dark:text-zinc-300 font-bold text-sm md:text-base group-hover:text-black dark:group-hover:text-white transition-colors text-center">
+                      {skill.skillName}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center justify-center py-16 px-4 text-center bg-white dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl shadow-sm">
+              <p className="text-zinc-500 dark:text-zinc-400 font-medium">No skills available right now.</p>
+            </div>
+          )}
           {/* View All Button */}
           <div className="flex justify-center mt-20 opacity-0 animate-reveal-up" style={{ animationDelay: '1.2s', transitionDelay: '1.2s' }}>
             <Link

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useGetProjectQuery } from "@/redux/api/project.api";
-import { ExternalLink, Github, Loader2 } from "lucide-react";
+import { ExternalLink, Github, Loader2, FolderGit2 } from "lucide-react";
 import PageLoader from "@/app/_components/PageLoader";
 
 const ProjectsPage = () => {
@@ -115,80 +115,102 @@ const ProjectsPage = () => {
                 </div>
 
                 {/* Projects Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredProjects.map((project, index) => (
-                        <div
-                            key={project._id}
-                            className="group bg-zinc-50 dark:bg-[#050505] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl overflow-hidden shadow-2xl animate-reveal-up"
-                            style={{ animationDelay: `${0.1 * (index + 1)}s`, transitionDelay: `${0.1 * (index + 1)}s` }}
-                        >
-                            {/* Project Image */}
-                            <div className="relative h-56 overflow-hidden">
-                                <img
-                                    src={project.imageUrl}
-                                    alt={project.title}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                                <div className="absolute inset-0 bg-black/10 dark:bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                {filteredProjects.length > 0 ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {filteredProjects.map((project, index) => (
+                            <div
+                                key={project._id}
+                                className="group bg-zinc-50 dark:bg-[#050505] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl overflow-hidden shadow-2xl animate-reveal-up"
+                                style={{ animationDelay: `${0.1 * (index + 1)}s`, transitionDelay: `${0.1 * (index + 1)}s` }}
+                            >
+                                {/* Project Image */}
+                                <div className="relative h-56 overflow-hidden">
+                                    <img
+                                        src={project.imageUrl}
+                                        alt={project.title}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                    <div className="absolute inset-0 bg-black/10 dark:bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
+                                </div>
+
+                                {/* Content */}
+                                <div className="p-5 sm:p-6 md:p-8 space-y-5">
+                                    <div className="space-y-2">
+                                        <h3 className="text-2xl font-black text-black dark:text-white group-hover:text-orange-500 transition-colors tracking-tight flex items-center gap-2">
+                                            <span>{project.title}</span>
+                                        </h3>
+                                        <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-[15px] leading-relaxed line-clamp-2">
+                                            {project.description}
+                                        </p>
+                                    </div>
+
+                                    {/* Tech Tags */}
+                                    <div className="flex flex-wrap gap-2">
+                                        {(() => {
+                                            const rawData = Array.isArray(project.technologies)
+                                                ? project.technologies
+                                                : [project.technologies];
+
+                                            const techList = rawData
+                                                .flatMap(item => (typeof item === 'string' ? item.split(',') : item))
+                                                .map(t => String(t).trim())
+                                                .filter(t => t !== "" && t !== "undefined");
+
+                                            return techList.map((tech, i) => (
+                                                <span
+                                                    key={i}
+                                                    className="text-[13px] font-medium bg-zinc-200 dark:bg-[#18181b] text-zinc-800 dark:text-white px-3 py-1 rounded-full border border-zinc-300 dark:border-zinc-800/50 hover:bg-zinc-300 dark:hover:bg-[#27272a] transition-all cursor-default"
+                                                >
+                                                    {tech}
+                                                </span>
+                                            ));
+                                        })()}
+                                    </div>
+
+                                    {/* Actions */}
+                                    <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                                        <a
+                                            href={project.liveUrl}
+                                            target="_blank"
+                                            className="flex-1 bg-black dark:bg-white text-white dark:text-black text-xs whitespace-nowrap font-black py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all active:scale-95 shadow-md"
+                                        >
+                                            <ExternalLink size={14} />
+                                            Live Demo
+                                        </a>
+                                        <a
+                                            href={project.githubUrl}
+                                            target="_blank"
+                                            className="flex-1 bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white text-xs whitespace-nowrap font-black py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 flex items-center justify-center gap-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all active:scale-95 shadow-sm"
+                                        >
+                                            <Github size={14} />
+                                            GitHub
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-
-                            {/* Content */}
-                            <div className="p-5 sm:p-6 md:p-8 space-y-5">
-                                <div className="space-y-2">
-                                    <h3 className="text-2xl font-black text-black dark:text-white group-hover:text-orange-500 transition-colors tracking-tight flex items-center gap-2">
-                                        <span>{project.title}</span>
-                                    </h3>
-                                    <p className="text-zinc-600 dark:text-zinc-400 text-sm md:text-[15px] leading-relaxed line-clamp-2">
-                                        {project.description}
-                                    </p>
-                                </div>
-
-                                {/* Tech Tags */}
-                                <div className="flex flex-wrap gap-2">
-                                    {(() => {
-                                        const rawData = Array.isArray(project.technologies)
-                                            ? project.technologies
-                                            : [project.technologies];
-
-                                        const techList = rawData
-                                            .flatMap(item => (typeof item === 'string' ? item.split(',') : item))
-                                            .map(t => String(t).trim())
-                                            .filter(t => t !== "" && t !== "undefined");
-
-                                        return techList.map((tech, i) => (
-                                            <span
-                                                key={i}
-                                                className="text-[13px] font-medium bg-zinc-200 dark:bg-[#18181b] text-zinc-800 dark:text-white px-3 py-1 rounded-full border border-zinc-300 dark:border-zinc-800/50 hover:bg-zinc-300 dark:hover:bg-[#27272a] transition-all cursor-default"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ));
-                                    })()}
-                                </div>
-
-                                {/* Actions */}
-                                <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                                    <a
-                                        href={project.liveUrl}
-                                        target="_blank"
-                                        className="flex-1 bg-black dark:bg-white text-white dark:text-black text-xs whitespace-nowrap font-black py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all active:scale-95 shadow-md"
-                                    >
-                                        <ExternalLink size={14} />
-                                        Live Demo
-                                    </a>
-                                    <a
-                                        href={project.githubUrl}
-                                        target="_blank"
-                                        className="flex-1 bg-zinc-100 dark:bg-zinc-900 text-black dark:text-white text-xs whitespace-nowrap font-black py-3 rounded-lg border border-zinc-200 dark:border-zinc-800 flex items-center justify-center gap-2 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all active:scale-95 shadow-sm"
-                                    >
-                                        <Github size={14} />
-                                        GitHub
-                                    </a>
-                                </div>
-                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="flex flex-col items-center justify-center py-20 px-4 text-center bg-zinc-50 dark:bg-[#0a0a0a] border border-zinc-200 dark:border-zinc-800/60 rounded-3xl animate-reveal-up shadow-sm">
+                        <div className="w-16 h-16 rounded-2xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 mb-4 shadow-sm">
+                            <FolderGit2 size={32} className="text-orange-500" />
                         </div>
-                    ))}
-                </div>
+                        <h3 className="text-xl md:text-2xl font-black text-black dark:text-white mb-2 tracking-tight">No Projects Found</h3>
+                        <p className="text-zinc-500 dark:text-zinc-400 text-sm md:text-base max-w-md mb-6 leading-relaxed">
+                            {activeCategory === "All Projects"
+                                ? "No projects have been added yet. Please check back soon!"
+                                : `No projects found in "${activeCategory}". Try switching to another category.`}
+                        </p>
+                        {activeCategory !== "All Projects" && (
+                            <button
+                                onClick={() => setActiveCategory("All Projects")}
+                                className="px-6 py-2.5 bg-black dark:bg-white text-white dark:text-black text-xs md:text-sm font-bold rounded-xl hover:bg-zinc-800 dark:hover:bg-zinc-200 transition-all shadow-md active:scale-95"
+                            >
+                                View All Projects
+                            </button>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

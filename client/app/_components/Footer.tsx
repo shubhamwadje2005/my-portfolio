@@ -283,45 +283,29 @@ const Footer = () => {
                     <div>
                         <h3 className="font-semibold mb-4 text-lg">Contact Info</h3>
                         <div className="space-y-3 text-sm">
-                            {/* <div className="flex items-center gap-3"><FaRegEnvelope /><span>{personal?.email}</span></div>
-                            <div className="flex items-center gap-3"><FiPhone /><span>+91-{personal?.phone}</span></div> */}
                             <div className="flex items-center gap-3">
                                 <FaRegEnvelope />
-
-                                {personal?.email ? (
-                                    <a
-                                        href={`mailto:${personal.email}`}
-                                        className="hover:text-orange-500"
-                                    >
-                                        {personal.email}
-                                    </a>
-                                ) : (
-                                    <span
-                                        onClick={() => alert("Email not available")}
-                                        className="cursor-pointer hover:text-red-500"
-                                    >
-                                        No Email
-                                    </span>
-                                )}
+                                <a
+                                    href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(personal?.email || "shubhamwadje2005@gmail.com")}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="hover:text-orange-500 transition-colors"
+                                >
+                                    {personal?.email || "shubhamwadje2005@gmail.com"}
+                                </a>
                             </div>
 
                             {/* PHONE */}
                             <div className="flex items-center gap-3 cursor-pointer">
                                 <FiPhone />
                                 <a
-                                    href={personal?.phone ? `tel:+91${personal.phone}` : "#"}
-                                    onClick={(e) => {
-                                        if (!personal?.phone) {
-                                            e.preventDefault()
-                                            alert("Phone number not available")
-                                        }
-                                    }}
-                                    className="hover:text-orange-500"
+                                    href={personal?.phone ? `tel:+91${personal.phone}` : "tel:+919028725948"}
+                                    className="hover:text-orange-500 transition-colors"
                                 >
-                                    +91-{personal?.phone || "XXXXXXXXXX"}
+                                    +91-{personal?.phone || "9028725948"}
                                 </a>
                             </div>
-                            <div className="flex items-center gap-3"><LuMapPin /><span>{personal?.location}</span></div>
+                            <div className="flex items-center gap-3"><LuMapPin /><span>{personal?.location || "Maharashtra, India"}</span></div>
                         </div>
                     </div>
 
@@ -331,9 +315,9 @@ const Footer = () => {
                         <div className="flex gap-4">
                             {/* GitHub Icon */}
                             <a
-                                // href={firstProject?.githubUrl || "#"}
                                 href="https://github.com/shubhamwadje2005"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 className="p-3 border border-zinc-800 bg-[#121212] text-gray-400 rounded-full transition-all duration-300 hover:border-orange-600 hover:text-white"
                             >
                                 <LuGithub size={18} />
@@ -341,9 +325,9 @@ const Footer = () => {
 
                             {/* LinkedIn Icon */}
                             <a
-                                // href={aboutData?.linkedin || "#"}
                                 href="https://www.linkedin.com/in/shubham-wadje-916a31317"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 className="p-3 border border-zinc-800 bg-[#121212] text-gray-400 rounded-full transition-all duration-300 hover:border-orange-600 hover:text-white"
                             >
                                 <FiLinkedin size={18} />
@@ -351,8 +335,10 @@ const Footer = () => {
 
                             {/* Email Icon */}
                             <a
-                                href={`mailto:${personal?.email}`}
-                                className="p-3 border border-zinc-800 bg-[#121212] text-gray-400 rounded-full transition-all duration-300 hover:border-orange-600 hover:text-white"
+                                href={`https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(personal?.email || "shubhamwadje2005@gmail.com")}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="p-3 border border-zinc-800 bg-[#121212] text-gray-400 rounded-full transition-all duration-300 hover:border-orange-600 hover:text-white cursor-pointer"
                             >
                                 <FaRegEnvelope size={18} />
                             </a>
